@@ -1,25 +1,15 @@
-
-
+using INVwebAPI.Service;
 using Microsoft.OpenApi;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddScoped<FileService>(); // 這行就是你要加的：註冊 FileService 給 DI 用
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "INV Web API",
-        Version = "v1"
-    });
-});
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -31,7 +21,6 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "INV Web API v1");
     });
-
 }
 
 app.UseHttpsRedirection();
