@@ -1,0 +1,44 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build folders
+bin/
+obj/
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# IIS
+*.vspscc
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Visual Studio Code workspace
+.vscode/
+
+# Others
+*.db
+*.sqlite
+
+# Node
+node_modules/
+
+# Ignore FileContentIndex where VS might lock files
+.vs/**/FileContentIndex/

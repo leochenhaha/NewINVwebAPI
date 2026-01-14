@@ -1,0 +1,6 @@
+@INVwebAPI_HostAddress = http://localhost:5209
+
+GET {{INVwebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
