@@ -1,0 +1,533 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "EINV_WEBContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "IrregularWords": null,
+   "MinimumProductVersion": "2.6.1301",
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "D:\\Work\\apiTrunNew\\NewINVwebAPI\\INVwebAPI\\INVwebAPI\\Data\\Db",
+   "PluralRules": null,
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "INVwebAPI",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 1,
+   "SingularRules": null,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[API_EC_TRANS01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[API_EC_TRANSTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DEMOMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DEMOTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_ALLOW01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_ALLOWTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Einv_CMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_INPUTINV01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_INPUTINVTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Einv_INVNO_CHECK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_PRIZE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_SALES_TAX_DECLARE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_TRANS01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_TRANSTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EINV_VIPMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FAMERORDER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[fnaitem]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[fnxacontmi]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[fnxacontti]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INPZIP5]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LINE_LIST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LoginVerify]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[mkf001]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[mkf002]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFALL01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFALLTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFAPIKEY]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFApiLOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFAPP01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFAPPT1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFCLEMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFCMPMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFCompOpen_INTERFACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFCTLSI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBT01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBT02]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTC0]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTC1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTCD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTCL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTEM]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTEO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTERR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDBTPS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFDPSMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFECPMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFEcr_INTERFACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFECR01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFECRFI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFECROP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFECRPI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFECRTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFGOGMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFGOO_BZX]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[mkfgooBZX]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFGOOMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFGOSMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINV01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINV01_CLOUD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVBL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVBLA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVCOUNT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVGOO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVMI_0108]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVMI_LOG1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVSB]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFINVTI_CLOUD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFIVONO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFIVONO_LOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFLOGNR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[mkfmnumi_new]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[mkfnews01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFPLUMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFPOS01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFPOSMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFSED00]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFSED01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFSEQ00]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFSEQMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFSTRMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFSUPMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRC01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRCW1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRCW2]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRCW3]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRCW4]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRCW5]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRCW6]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFTRCW7]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFUPD_LOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKFVersion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKTINVRPT01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MKTINVRPTTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ORDERSHOPEE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[POSZIPCODE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSBATPRTMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSBATPRTTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSCOM01]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSCOMMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSDESCIMG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSDESCMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSDESCMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSDPDMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSDTPMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSLOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSLOGCTRL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSLOGTABLE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSMNULNG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSMNUMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSNEWSMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSNEWSTI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSORGMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSPASFG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSPASHISTORY]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSPASMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSPTGMI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSROLT1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYSSTRMI]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}
