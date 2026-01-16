@@ -9,10 +9,6 @@ namespace INVwebAPI.Data.Db;
 
 public partial class EINV_WEBContext : DbContext
 {
-    public EINV_WEBContext()
-    {
-    }
-
     public EINV_WEBContext(DbContextOptions<EINV_WEBContext> options)
         : base(options)
     {
@@ -259,10 +255,6 @@ public partial class EINV_WEBContext : DbContext
     public virtual DbSet<mkfmnumi_new> mkfmnumi_new { get; set; }
 
     public virtual DbSet<mkfnews01> mkfnews01 { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=einvoice.ksi.com.tw;Initial Catalog=EINV_WEB;Persist Security Info=True;User ID=sa;Password=Pa$$w0rd@KSI;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

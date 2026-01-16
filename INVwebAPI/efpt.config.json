@@ -3,7 +3,7 @@
    "ContextClassName": "EINV_WEBContext",
    "ContextNamespace": null,
    "FilterSchemas": false,
-   "IncludeConnectionString": true,
+   "IncludeConnectionString": false,
    "IrregularWords": null,
    "MinimumProductVersion": "2.6.1301",
    "ModelNamespace": null,
