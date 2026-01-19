@@ -1,0 +1,128 @@
+可以，我先把這支 INVController 這包「遷移到 .NET 8」的剩下代辦，拆成一份清楚的待辦清單（按依賴順序排，前面的做完後面才好做）。
+
+1. 建立新專案基礎骨架
+   建立 INVController（ASP.NET Core，ControllerBase + ApiController）
+   建立統一回傳格式的共用 Response DTO（至少 STATUS、MSG）
+   建立共用例外處理策略（所有錯誤都回同一種 DTO，不噴預設 500 格式）
+
+2. DI 與基礎元件接上
+   把原本的 TokenManager 行為改成可注入的服務（例如 ITokenService），Controller 不直接 new
+   把 Utility 改成可注入的服務（例如 IInvoiceUtility），Controller 不直接 new
+   把 Logger 改成 ASP.NET Core 的 ILogger 或保留 NLog（但要走 DI）
+
+3. EF Core 與資料存取層規劃
+   確認 mposEntities 對應到 .NET 8 的 DbContext（EF Core）
+   把所有 Entity 當內部資料模型使用，API 合約一律改 DTO
+   把 AddOrUpdate（EF6）替換成 EF Core 的 Upsert 策略（需要明確規則：用主鍵查、存在就 Update，不存在就 Add）
+
+4. 交易與鎖定行為對齊（很關鍵）
+   GetINVnumber 內的 TransactionScope + Serializable 行為在 .NET 8 要怎麼落地（TransactionScope 或 DbContextTransaction）
+   「SELECT TOP 0 NULL FROM MKFIVONO WITH (TABLOCKX, HOLDLOCK)」這種鎖表語意在 EF Core 的執行方式
+   確保取號與更新 CURRENT_IVO 的一致性，避免併發重號
+
+5. 發票取號模組整理成 Service（核心）
+   把 GetINVnumber 搬成 InvoiceNumberService.GetNextInvoiceNumberAsync
+   把 GetINVNO 搬成 InvoiceNumberService.GetInvoiceNumberAsync（或合併成同一個取號流程）
+   把 MKPGETNO（Stored Procedure）搬成 SequenceService.GetSequenceAsync
+   把 MKPINVAI（Stored Procedure）呼叫封裝成方法，並整理 output 參數處理
+
+6. UpdateCURRENT_IVO 與 CLIVO 行為搬移
+   建立 UpdateCurrentIvoRequestDto / ResponseDto
+   建立 ClivoRequestDto / ResponseDto
+   把「檢查發票列印資料存在才允許推進 CURRENT_IVO」的規則寫進 Service
+   確認 UpdateCURRENT_IVO 走 MKFINV01，CLIVO 走 MKTINVRPT01 的差異
+
+7. CHECKMNUMBER 外部呼叫改造
+   把 HttpWebRequest 改成 IHttpClientFactory + HttpClient
+   把 URL 與 timeout 改成設定檔
+   回傳邏輯（isExist != Y 也回 STATUS=true MSG=成功）要維持舊行為
+
+8. UploadDealData（B2C）完整搬移
+   建立 UploadDealDataRequestDto（含 Detail 子 DTO）與 ResponseDto
+   把所有驗證集中到 Service（日期必須當日、統編檢核、手機條碼檢核、大小寫處理）
+   處理「ORDER_NO 已開立過」的查詢分支與回傳欄位（發票號碼、Random_Code）
+   處理取主檔序號、取發票號碼、RandomCode、QRCODE 生成、CarryId2 截取
+   處理寫入 MKFINV01 與 MKFINVTI 的 mapping（用 private mapping methods）
+   處理 MIG_Type = B 的金額加總差異
+
+9. UploadDealDataPrint 搬移
+   跟 UploadDealData 幾乎同流程，但差在會呼叫 PrintINV 並處理 Print_Yn 更新
+   把「已列印就補印/不補印」的行為整理成可讀的 Service 流程
+
+10. PrintINV（列印與 MQTT）拆分重構
+    把列印內容組裝（MasterJson、DetailJson、QRCode 組字串）拆成 PrintPayloadBuilder
+    把 MQTT publish 抽成 IMqttPublisher（避免 Controller/Service 內直接 new MqttClient）
+    把 on_PrintType = 01/02 的分支規則保留，但改成可測試的服務
+    注意：這段目前混很重，是最需要拆的地方
+
+11. CancelINV 搬移
+    建立 CancelInvRequestDto / ResponseDto
+    查無發票、已作廢不可重複、更新作廢欄位，全部在 Service
+    回傳 RESULT = OK 的行為保留
+
+12. UploadDealDataOFFLINE 搬移
+    建立 Offline 上傳 DTO（含 CARRY_TYPE 特殊檢核：EG0681 必填 email、3J0002 必填 carry_id2）
+    處理「發票號碼已開立」與「訂單已成立過」兩個查詢分支
+    處理左 QRCode 與 carry_id2 截取
+    回傳 MSG = 發票上傳成功 的舊字串要保留
+
+13. GetINVnumberOFFLINE 搬移
+    建立 Request/Response DTO（回傳 IVOBNO、INVENO）
+    呼叫 MKPINVAI 取得整段字軌
+    處理 2024.03.25 的特殊規則：取到 100 張後把 MKFIVONO flag 改 N，避免系統再使用
+
+14. UploadALL（折讓單上傳）搬移
+    建立 UploadALLRequestDto（含 Detail）
+    檢查折讓單是否存在（MKFALL01）
+    2024.03.25 規則：折讓明細中的發票必須存在 MKFINV01，否則失敗
+    寫入 MKFALL01、MKFALLTI
+
+15. CancelALL（折讓作廢）搬移
+    建立 CancelALLRequestDto / ResponseDto
+    查無資料、已作廢不可重複、更新取消資訊
+
+16. QueryINVData 搬移
+    建立 QueryINVDataRequestDto / ResponseDto
+    處理查 EINV_INPUTINV01 與 EINV_INPUTINVTI 的組裝回傳（舊版是把結果塞進 MSG 欄位）
+    這支要特別決定 Response DTO 的內容長相，才能既符合「DTO 合約」又不破壞舊用戶端期待
+
+17. CreateINVHEAD（服務平台上傳字軌）搬移
+    建立 CreateInvHeadRequestDto / ResponseDto
+    完整保留 1 到 6 點檢核邏輯（格式、期別規則、區間重疊、授權檔 Einv_INVNO_CHECK）
+    注意舊碼有一段正則檢核寫重了（IVO_B 檢核被複製到 IVO_E），新碼要修正但不改原意
+
+18. UploadB2BDealData 搬移
+    流程跟 UploadDealData 類似，但會生成 A4 PDF（utility.GenerateB2BPDF）
+    回傳欄位有「隨機碼」與「A4證明聯」URL，且 URL 組法要改成 ASP.NET Core 的方式（不要用 Request.RequestUri）
+    PDF 產生與路徑 TEMP 目錄管理要抽到 FileService
+
+19. UploadB2BALL（B2B 折讓）搬移
+    寫入 MKFALL01、MKFALLTI 後呼叫 GenerateB2BALLPDF
+    回傳 A4證明聯 URL（同樣要改 Request 組法）
+
+20. Download（下載 PDF）搬移
+    改成 ASP.NET Core 的 File() 回傳（FileContentResult 或 PhysicalFile）
+    保留授權檢查（token）
+    路徑從 AppDomain.CurrentDomain.BaseDirectory 改成 IWebHostEnvironment.ContentRootPath 或 WebRootPath 的策略
+
+21. UploadB2BDealDataQuery（SemaphoreSlim 排隊）搬移
+    在 .NET 8 仍可用 SemaphoreSlim，但要放在 Service 層或專用 Gate，Controller 不要持有業務鎖
+    整段流程跟 UploadB2BDealData 類似，並且 finally 釋放鎖要保留
+
+22. PrintINVB2C（FastReport 轉 PDF 下載）搬移
+    FastReport 的 Report 生命週期與 Export 方式在 .NET 8 的相依套件確認
+    回傳 PDF 下載改用 File(ms.ToArray(), "application/pdf", $"{invno}.pdf")
+    這支同樣要把「查發票存在」與「產報表」放 Service
+
+23. Swagger 測試說明與範例整理
+    每支 API 的 Request DTO 欄位說明與範例（尤其 UploadDealData 那種巢狀 Detail）
+    確認日期格式、必填欄位、可選欄位
+    如果有 multipart（你這段貼的主要是 JSON，[FromBody]），也要標出哪幾支是 [FromForm] + IFormFile（目前這份 code 片段還沒看到檔案上傳端點，但整個專案看起來有）
+
+24. 回歸測試重點清單
+    取號不重複（含 6 個月內重複檢查）
+    併發壓測：同 COMP/STR/ECR 同時打 GetINVnumber / UploadDealData
+    舊版 MSG 字串一致性（成功、無設定發票字軌、查無此發票列印等）
+    HTTP StatusCode 是否要完全對齊（舊版很多用 ExpectationFailed/BadRequest/OK）
+
+如果你要我「先帶你做一部份」，我建議第一天先把第 1 到第 5 項做完，因為那是後面所有 Upload/Cancel/Print 的地基。接著第二天再做 UploadDealData 主流程，第 10 項列印與 MQTT 放最後，因為拆分工作量最大，也最容易踩坑。

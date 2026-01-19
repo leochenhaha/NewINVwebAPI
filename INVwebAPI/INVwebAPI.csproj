@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Db\" />
+    <Folder Include="Data\Entities\" />
   </ItemGroup>
 
   <ItemGroup>
